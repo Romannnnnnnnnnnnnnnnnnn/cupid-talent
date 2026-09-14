@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #ffffff;
+  --color-cream: #f7f4f0;
+  --color-ink: #111111;
+  --color-wine: #7a1a28;
+  --color-stone: #5c5854;
+  --color-ash: #8a847c;
+  --color-line: #e8e2da;
+  --color-blush: #f4e8ea;
+
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bodoni Moda", "Times New Roman", serif;
+
+  --text-label: 0.75rem;
+  --text-hero: clamp(4.5rem, 15vw, 9.5rem);
+  --text-display: clamp(2.35rem, 5.4vw, 4.5rem);
+  --text-title: clamp(1.75rem, 3vw, 2.6rem);
+  --text-lede: clamp(1.4rem, 2.3vw, 1.95rem);
+
+  --tracking-label: 0.22em;
+  --tracking-brand: 0.46em;
+  --tracking-display: -0.035em;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius: 0px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-slow: 400ms;
+  --shadow-border: 0 0 0 1px rgb(17 17 17 / 0.08), 0 1px 2px -1px rgb(17 17 17 / 0.06);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-wine);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-wine);
+    outline-offset: 3px;
+  }
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 44s linear infinite;
+  will-change: transform;
+}
+
+@utility marquee-track-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee 62s linear infinite reverse;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .marquee-track:hover,
+  .marquee-track-slow:hover {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track,
+  .marquee-track-slow {
+    animation: none;
+    will-change: auto;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
